@@ -2,17 +2,19 @@ import React, { useRef, useState } from 'react';
 import { useFrame } from 'react-three-fiber';
 
 const Box = (props) => {
-  const mesh = useRef();
+  const meshRef = useRef();
 
   const [hovered, setHover] = useState(false);
   const [active, setActive] = useState(false);
 
-  useFrame(() => (mesh.current.rotation.x = mesh.current.rotation.y += 0.01));
+  useFrame(
+    () => (meshRef.current.rotation.x = meshRef.current.rotation.y += 0.01)
+  );
 
   return (
     <mesh
       {...props}
-      ref={mesh}
+      ref={meshRef}
       scale={active ? [1.5, 1.5, 1.5] : [1, 1, 1]}
       onClick={(e) => setActive(!active)}
       onPointerOver={(e) => setHover(true)}
